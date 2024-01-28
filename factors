@@ -1,46 +1,7 @@
-#!/usr/bin/python3
-
-import sys
-from sys import argv
-
-def factorize(value):
-
-&quot;&quot;&quot;
-# Factorize as many numbers as possible into..
-# ..a product of two smaller numbers.
-# VARIABLE(&quot; &quot;):
-# factorize(int) Factorize all the things!
-# Usage: factors &lt;file&gt;
-# Output format: n=p*q
-&quot;&quot;&quot;
-i = 2
-
-if value &lt; 2:
-return
-print()
-print(value, &quot;&lt;- &quot;)
-while value % i:
-i += 1
-print(&quot;{:.0f}={:.0f}*{:.0f}&quot;.format(value, value / i, i))
-
-print()
-print(value, &quot;&lt;- &quot;)
-
-if len(argv) != 2:
-exit()
-
-try:
-with open(argv[1]) as file:
-line = file.readline()
-
-while line != &quot;&quot;:
-value = int(line.split(&#39;\n&#39;)[0])
-factorize(value)
-line = file.readline()
-except FileNotFoundError:
-print(f&#39;File not found: {argv}&#39;)
-except ValueError:
-print(f&#39;Invalid input in the file: {argv}&#39;)
-except Exception as e:
-print(f&#39;An error occurred: {str(e)}&#39;)
-pass
+#!/usr/bin/bash
+FILE=$1
+while read NUMBERS;
+do
+        factors=($(factors $NUMBERS))
+        echo "$NUMBERS=$(($NUMBERS/$(factors[1])))*${factors[1]}"
+done < $FILE
