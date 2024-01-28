@@ -2,6 +2,6 @@
 FILE=$1
 while read NUMBERS;
 do
-        factors=($(factors $NUMBERS))
+        factors=($(factor $NUMBERS))
         echo "$NUMBERS=$(($NUMBERS/$(factors[1])))*${factors[1]}"
 done < $FILE
