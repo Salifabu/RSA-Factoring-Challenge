@@ -1,7 +1,20 @@
-#!/usr/bin/bash
-FILE=$1
-while read NUMBERS;
-do
-        factors=($(factors $NUMBERS))
-        echo "$NUMBERS=$(($NUMBERS/$(factors[1])))*${factors[1]}"
-done < $FILE
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <file>"
+    exit 1
+fi
+
+input_file=$1
+
+while read -r number; do
+   
+    for ((i = 2; i <= number / 2; i++)); do
+        if [ $((number % i)) -eq 0 ]; then
+            factor1=$i
+            factor2=$((number / i))
+            echo "$number=$factor1*$factor2"
+            break
+        fi
+    done
+done < "$input_file"
